@@ -28,33 +28,59 @@ namespace Takens {
             if (exp.hasCollided)
                 StartCoroutine("Crash");
 
-          
+            
 
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Application.LoadLevel(Application.loadedLevel);
+            }
             if (Input.GetKey("space")){
                 rigid.AddRelativeForce(Vector3.forward * Time.deltaTime  * thrust);
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.LeftArrow))
                 {
                     rigid.AddTorque(transform.up * -rotate);
                     //transform.RotateAroundLocal(Vector3.forward, rotate);
                 }
 
-                if (Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
                 {
                     rigid.AddTorque(transform.up * rotate);
+                    //transform.RotateAroundLocal(Vector3.forward, -rotate);
+                }
+                if (Input.GetKey(KeyCode.W))
+                {
+                    rigid.AddTorque(transform.right * rotate);
+                    //transform.RotateAroundLocal(Vector3.forward, rotate);
+                }
+
+                if (Input.GetKey(KeyCode.S))
+                {
+                    rigid.AddTorque(transform.right  * -rotate);
                     //transform.RotateAroundLocal(Vector3.forward, -rotate);
                 }
             }
             else
             {
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
                 {
                     rigid.AddTorque(transform.up * .6f * -rotate);
                     //transform.RotateAroundLocal(Vector3.forward, rotate);
                 }
 
-                if (Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
                 {
                     rigid.AddTorque(transform.up * .6f *  rotate);
+                    //transform.RotateAroundLocal(Vector3.forward, -rotate);
+                }
+                if (Input.GetKey(KeyCode.W))
+                {
+                    rigid.AddTorque(transform.right * .6f * rotate);
+                    //transform.RotateAroundLocal(Vector3.forward, rotate);
+                }
+
+                if (Input.GetKey(KeyCode.S))
+                {
+                    rigid.AddTorque(transform.right * .6f * -rotate);
                     //transform.RotateAroundLocal(Vector3.forward, -rotate);
                 }
             }
@@ -93,6 +119,7 @@ namespace Takens {
             yield return new WaitForSeconds(.2f);
             GetComponent<MeshRenderer>().enabled = false;
             yield return new WaitForSeconds(1f);
+            Application.LoadLevel(Application.loadedLevel);
             Destroy(gameObject);
         }
 
